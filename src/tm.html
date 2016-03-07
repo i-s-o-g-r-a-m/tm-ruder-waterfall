@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+
+    <head>
+
+        <meta charset="utf-8">
+
+        <style type="text/css">
+
+            body {
+                text-align: right;
+                font-family: sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            .container > div div {
+                font-size: 90%;
+            }
+
+        </style>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+        <script>
+
+            var phrase = ["typographische", 'monatsblätter'][Math.floor(Math.random() * 2)];
+
+            var redraw = function() {
+                $('div').remove();
+                $('body').append('<div class="container"></div>');
+
+                var div = "<div class='inner'>" + phrase + "<div></div></div>";
+
+                var windowHeight = $(window).height();
+                var halfHeight = windowHeight * .495;
+
+                var outer = $(div);
+                var container = $('.container');
+                var fontSize = halfHeight / 5;
+
+                var walkDown;
+                var walkUp;
+
+                container.css('font-size', fontSize + 'px');
+                container.append(outer);
+
+                while (container.height() < halfHeight) {
+                    walkDown = $(div);
+                    outer.find('div:last').append(walkDown);
+                    walkDown.css('line-height', walkDown.css('font-size'));
+                }
+
+                walkUp = outer.find('div:last').closest('div').parent();
+                while (container.height() < windowHeight && walkUp.parents('.inner').length) {
+                    walkUp.parent().parent().append(phrase);
+                    walkUp = walkUp.parent().parent();
+                }
+            };
+
+            $(function() {
+                redraw();
+                $(window).resize(function() { redraw(); });
+            });
+
+        </script>
+
+
+    </head>
+
+    <body></body>
+
+</html>
