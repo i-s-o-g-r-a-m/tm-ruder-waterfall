@@ -33,19 +33,18 @@
                 var div = "<div class='inner'>" + phrase + "<div></div></div>";
 
                 var windowHeight = $(window).height();
-                var halfHeight = windowHeight * .495;
+                var midpoint = windowHeight * .495;
 
                 var outer = $(div);
                 var container = $('.container');
-                var fontSize = halfHeight / 5;
 
                 var walkDown;
                 var walkUp;
 
-                container.css('font-size', fontSize + 'px');
+                container.css('font-size', midpoint / 4.5 + 'px');
                 container.append(outer);
 
-                while (container.height() < halfHeight) {
+                while (container.height() < midpoint) {
                     walkDown = $(div);
                     outer.find('div:last').append(walkDown);
                     walkDown.css('line-height', walkDown.css('font-size'));
